@@ -83,9 +83,30 @@ class BooleanFH extends FieldHandler {
     isDecodeType = (key, val, doc) => {
         return (typeof val === 'boolean');
     };
+
+    isEncodeType = (key: string, val, doc): boolean => {
+	    console.log("key BooleanFH: " + key);
+	    console.log("val BooleanFH: " + val);
+	    console.log("doc BooleanFH: " + doc);
+	    return (typeof val === 'boolean');
+    };
+
+    encode = (key: string, val, doc) => {
+        console.log("Boolean parse JSON: ");
+        console.log(Boolean(JSON.parse(val)));
+        console.log("Boolean encode: ");
+        console.log(this.encodeFn(key, Boolean(JSON.parse(val)), doc));
+        return this.encodeFn(key, Boolean(JSON.parse(val)), doc);
+    }
+
     encodeFn = (key: string, val, doc) => {
-        const {data} = val;                
-        return data;
+        const {data} = val;
+        console.log("encodeFn Boolean: ");
+        console.log(data);
+        console.log(val);
+        console.log(doc);
+        console.log("encodeFn Boolean end");
+        return val;
     };
 }
 

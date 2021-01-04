@@ -169,7 +169,7 @@ function writeCollection(data:JSON, path: string): Promise<any> {
 
         }
         
-        resolve();
+        resolve(undefined);
     });
 }
 
