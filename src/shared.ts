@@ -114,9 +114,28 @@ class TimeStampFH extends FieldHandler {
     isDecodeType = (key, val, doc) => {
         return (val instanceof Date);
     };
+
+    isEncodeType = (key: string, val, doc): boolean => {
+        console.log("TimeStampFH: ");
+        try {
+            // check if string with positive epoch
+            console.log(Date.parse(val));
+            console.log("val !== number: ");
+            console.log(val !== 'number');
+            return Date.parse(val) > -1 && (val !== 'number');
+        } catch (e) {
+            return false
+        }
+    }
+
+    encode = (key: string, val, doc) => {
+        return this.encodeFn(key, val, doc);
+    };
+
     encodeFn = (key: string, val, doc) => {
-        const {data} = val;
-        return new Date(data);
+        console.log("TimeStampFH: ");
+        console.log(new Date(val).getTime());
+        return new Date(val).getTime();
     };    
 }
 
